@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: my-deployment
+  namespace: my-ns
+spec:
+  selector:
+    matchLabels:
+      env: happy
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        env: happy
+    spec:
+      containers:
+      - name: cont1
+        image: nginx
+        resources:
+          requests:
+            memory: 100Gi
+            cpu: 100Gi
+          limits:
+            memory: 100Gi
+            cpu: 100Gi
+        ports:
+          - containerPort: 80
+            name: my-port
+        env:
+          - name: vamsi 
+            valueFrom:
+              configMapKeyRef:
+                name: my-config
+                key: key 
+        volumeMounts:
+          - name: my-volume
+            mountPath: /vamsi/temp
+      volumes: 
+        - name: my-volume
+          persistentVolumeClaim:
+            claimName: mypvc
+

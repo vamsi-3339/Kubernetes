@@ -1,0 +1,27 @@
+apiVersion: v1 
+kind: Pod 
+metadata:
+  name: pod-1
+  labels:
+    env: happy
+spec:
+  containers:
+    - name: cont1
+      image: nginx
+      resources:
+        requests:
+          memory: 100Gi
+          cpu: 100Gi
+        limits:
+          memory: 100Gi
+          cpu: 100Gi
+      env:
+        - name: vamsi
+          value: root
+      volumeMounts:
+        - name: my-volume
+          mountPath: /vamsi/temp
+  volumes:
+    - name: my-volume
+      hostPath:
+        path: /vamsi/temp/user/devops

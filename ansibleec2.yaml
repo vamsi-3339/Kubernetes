@@ -1,0 +1,17 @@
+---
+- name: ec2
+  hosts: localhost
+  connection: local
+  tasks:
+    amazon.aws.ec2.instance:
+    name: vamsi 
+    key_name: "vamsi"
+    instace_type: 
+    image_id: 
+    region: 
+    network:
+      assign_public_ip: true
+      security_group: default
+      vpc_subnet_id: subnet-0123456
+
+      
